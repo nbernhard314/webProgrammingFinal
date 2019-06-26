@@ -1,0 +1,22 @@
+{
+  "name": "travel_experience_marketplace",
+  "version": "1.0.0",
+  "description": "An website that offers customers the ability to book travel experiences online.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbernhard314/webProgrammingFinal.git"
+  },
+  "author": "Natalie Bernhard, Rachel Cipkins, Maria Trifonova, Adam Undus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbernhard314/webProgrammingFinal/issues"
+  },
+  "homepage": "https://github.com/nbernhard314/webProgrammingFinal#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
