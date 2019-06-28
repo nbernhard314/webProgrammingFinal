@@ -10,6 +10,10 @@ router.post("/", async (req, res) => {});
 
 router.get("/login", async (req, res) => {});
 
+router.post("/login", async (req, res) => {});
+
+router.get("/logout", async (req, res) => {});
+
 const constructorMethod = app => {
   app.use("/", router);
 
