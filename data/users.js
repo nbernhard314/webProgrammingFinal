@@ -152,7 +152,7 @@ let exportFunctions = {
     if (updateRet.modifiedCount === 0) {
       throw "could not update cart successfully";
     }
-    return await this.getByID(objID);
+    return await this.getByID(id);
   },
   async clearCart(id) {
     let user = await this.getByID(id);
@@ -167,7 +167,19 @@ let exportFunctions = {
     if (updateRet.modifiedCount === 0) {
       throw "could not update cart successfully";
     }
-    return await this.getByID(objID);
+    return await this.getByID(id);
+  },
+
+  async checkLogin(username, password) {
+    try {
+      const hash = await this.getByUsername(username)["password"];
+      if (await bcrypt.compare(password, hash)) {
+        return true;
+      }
+      throw "Invalid username or password.";
+    } catch (e) {
+      throw "Invalid username or password.";
+    }
   }
 };
 
