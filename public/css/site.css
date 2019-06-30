@@ -1,0 +1,53 @@
+*{
+	font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+	
+}
+
+h1{
+	text-align: center;
+	margin-top: 150px;
+}
+
+
+.nav-link {
+	color: white;
+	font-size: 20px;
+}
+
+.nav-link:hover, .nav-link:active{
+	background-color: white;
+	color: black;
+
+}
+
+nav {
+	padding: 15px;
+	background-color: grey;
+}
+
+.navbar-nav > li {
+	margin-left: 15px;
+  	margin-right: 15px;
+}
+
+
+.h2 {
+	text-align: center;
+}
+
+#login-form{
+
+	position: absolute;
+  	left: 150px
+}
+
+#login-page{
+	padding-top: 5rem;
+}
+
+#login-page p {
+	font-size: 20px;
+}
