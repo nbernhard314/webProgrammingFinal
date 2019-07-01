@@ -1,14 +1,13 @@
 
 <div id="login-page">
   <h2>Login</h2>
-  <p>
-    Enter you username and password to log in.
+  <p>Enter you username and password to log in
   </p>
   <form class="server-form" id="login-form" method="post">
     <div class="form-group">
-      <label for="username">Username:</label>
+      <label for="username">Username</label>
       <input type="text" class="form-control" id="username" name="username" value="{{username}}">
-      <label for="password">Password:</label>
+      <label for="password">Password</label>
       <input type="password" class="form-control" id="password" name="password" value="{{password}}">
     </div>
     {{#if error}}
