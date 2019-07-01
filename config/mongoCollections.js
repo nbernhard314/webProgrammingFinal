@@ -15,8 +15,20 @@ const getCollectionFn = collection => {
   };
 };
 
+async function clearCollections() {
+  try {
+    // We can recover from this; if it can't drop the collection, it's because
+    const db = await dbConnection();
+    await db.collection("Users").drop();
+    await db.collection("Products").drop();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 /* Now, you can list your collections here: */
 module.exports = {
   users: getCollectionFn("Users"),
-  products: getCollectionFn("Products")
+  products: getCollectionFn("Products"),
+  clearCollections
 };

@@ -1,4 +1,4 @@
-const mongoCollections = require("./mongoCollections");
+const mongoCollections = require("../config/mongoCollections");
 const products = mongoCollections.products;
 const mongo = require("mongodb");
 
@@ -10,20 +10,9 @@ let exportedFunctions = {
       typeof prodObj.description != "string" ||
       typeof prodObj.price != "string" ||
       typeof prodObj.imagePath != "string" ||
-      !prodObj.peopleAlsoBought instanceof Array ||
-      !prodObj.reviews instanceof Array
+      !prodObj.peopleAlsoBought instanceof Array
     ) {
       throw TypeError("Wrong type provided");
-    }
-    if (prodObj.reviews.length > 0) {
-      if (
-        typeof prodObj.reviews[0]["title"] != "string" ||
-        typeof prodObj.reviews[0]["rating"] != "string" ||
-        typeof prodObj.reviews[0]["postedBy"] != "string" ||
-        typeof prodObj.reviews[0]["comment"] != "string"
-      ) {
-        throw "Wrong type provided for review";
-      }
     }
     let newProduct = {
       itemName: prodObj.itemName,
@@ -31,7 +20,7 @@ let exportedFunctions = {
       price: prodObj.price,
       imagePath: prodObj.imagePath,
       peopleAlsoBought: prodObj.peopleAlsoBought,
-      reviews: prodObj.reviews
+      reviews: {}
     };
 
     const allProducts = await products();

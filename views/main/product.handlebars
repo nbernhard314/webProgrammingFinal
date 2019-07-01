@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-12">
+        {{#if error }}
+        <div class="error">
+            {{ error }}
+        </div>
+        {{/if}}
+
+    </div>
+    {{#if product }}
+    <div class="form-group">
+        <div class="alert alert-success">
+            <dl>
+                <dt>Item Name:</dt>
+                <dd>{{itemName}}</dd>
+                <dt>Description:</dt>
+                <dd>{{description}}</dd>
+                <dt>Price:</dt>
+                <dd>{{price}}</dd>
+                <dt>Image Path:</dt>
+                <dd>{{imagePath}}</dd>
+            </dl>
+        </div>
+        <a href="/logout">Logout</a>
+    </div>
+    {{/if}}
+    {{#if authenticated}}
+    <div class="add-to-cart">
+        <p>add to cart</p>
+        {{!-- TODO ADD TO CART BUTTON --}}
+    </div>
+    {{/if}}
+</div>

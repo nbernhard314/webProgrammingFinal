@@ -1,4 +1,4 @@
-const mongoCollections = require("./mongoCollections");
+const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const bcrypt = require("bcryptjs");
 const saltRounds = 16;
@@ -43,7 +43,7 @@ let exportFunctions = {
   },
 
   async getByID(id) {
-    if (typeof id != "string") {
+    if (!id) {
       throw "Must provide ID ";
     }
     let objID = mongo.ObjectID(id);
@@ -64,7 +64,7 @@ let exportFunctions = {
   },
 
   async deleteUser(id) {
-    if (typeof id != "string") {
+    if (!id) {
       throw "Must provide ID ";
     }
     let objID = mongo.ObjectID(id);
@@ -77,7 +77,7 @@ let exportFunctions = {
   },
 
   async updateUser(id, userObj) {
-    if (typeof id != "string" || !userObj) {
+    if (!id || !userObj) {
       throw "Must provide ID and user object";
     }
     let newUser = {};
@@ -138,6 +138,9 @@ let exportFunctions = {
   },
 
   async addToCart(id, productID) {
+    if (!id || !productID) {
+      throw "Must provide ID and Product ID";
+    }
     let user = await this.getByID(id);
     let newCart = user.cart;
     newCart.push(productID);
@@ -155,6 +158,9 @@ let exportFunctions = {
     return await this.getByID(id);
   },
   async clearCart(id) {
+    if (!id || !productID) {
+      throw "Must provide ID and Product ID";
+    }
     let user = await this.getByID(id);
     let newUser = {
       cart: []
@@ -172,7 +178,9 @@ let exportFunctions = {
 
   async checkLogin(username, password) {
     try {
-      const hash = await this.getByUsername(username)["password"];
+      const user = await this.getByUsername(username);
+      const hash = user["password"];
+      console.log(hash);
       if (await bcrypt.compare(password, hash)) {
         return true;
       }

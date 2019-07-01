@@ -8,15 +8,17 @@ const products = data.products;
 let authenticatedSessions = {};
 
 router.get("/", (req, res) => {
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/home", {});
   } else {
-    res.render("main/home", { username: authenticatedSession[req.session.id] });
+    res.render("main/home", {
+      username: authenticatedSessions[req.session.id]
+    });
   }
 });
 
 router.get("/login", (req, res) => {
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.render("auth/login", {});
   } else {
     res.redirect("/");
@@ -34,9 +36,9 @@ router.post("/login", async (req, res) => {
   }
   try {
     if (await users.checkLogin(username, password)) {
-      //console.log("login success");
-      authSessions[req.session.id] = username;
+      authenticatedSessions[req.session.id] = username;
       res.redirect("/");
+      console.log("login success");
       return;
     }
   } catch {
@@ -48,7 +50,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.redirect("/");
   } else {
     delete authenticatedSessions[req.session.id];
@@ -64,13 +66,27 @@ router.get("/product/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const product = await products.getByID(id);
+    if (authenticatedSessions[req.session.id] == undefined) {
+      res.render("main/product", {
+        product: product,
+        authenticated: false,
+        itemName: product.itemName,
+        description: product.description,
+        price: product.price,
+        imagePath: product.imagePath
+      });
+    } else {
+      res.render("main/product", {
+        product: product,
+        authenticated: true,
+        itemName: product.itemName,
+        description: product.description,
+        price: product.price,
+        imagePath: product.imagePath
+      });
+    }
   } catch (e) {
     res.render("main/error", { error: e });
-  }
-  if (authenticatedSession[req.session.id] == undefined) {
-    res.render("main/product", { product: product, authenticated: false });
-  } else {
-    res.render("main/product", { product: product, authenticated: true });
   }
 });
 
@@ -78,7 +94,7 @@ router.post("/product/:id", async (req, res) => {
   //This post is to add product to cart. The add to cart button should only
   //be visible to logged in users.
   const productID = req.params.id;
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/error", { error: "No user logged in" });
   } else {
     try {
@@ -93,7 +109,7 @@ router.post("/product/:id", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/error", { error: "cannot be signed in and sign up." });
   } else {
     res.render("auth/signup", {});
@@ -101,7 +117,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  if (authenticatedSession[req.session.id] == undefined) {
+  if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/error", { error: "cannot be signed in and sign up." });
   } else {
     //TODO: use client side JS to make sure fields are filled in properly.

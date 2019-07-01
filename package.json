@@ -4,7 +4,8 @@
   "description": "An website that offers customers the ability to book travel experiences online.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed": "node ./config/seed.js"
   },
   "repository": {
     "type": "git",
