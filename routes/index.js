@@ -108,6 +108,55 @@ router.post("/product/:id", async (req, res) => {
   }
 });
 
+router.get("/cart", async (req, res) => {
+  if (authenticatedSessions[req.session.id] == undefined) {
+    res.redirect("/login");
+  } else {
+    try {
+      const user = await users.getByUsername(
+        authenticatedSessions[req.session.id]
+      );
+      const cart = user.cart;
+      const items = [];
+      let totalPrice = 0;
+      for (let i = 0; i < cart.length; i++) {
+        let p = await products.getByID(cart[i]);
+        items.push(p);
+        totalPrice += parseFloat(p.price);
+      }
+      res.render("main/cart", {
+        item: items.map(item => {
+          return {
+            itemName: item.itemName,
+            price: item.price,
+            id: item._id
+          };
+        }),
+        notEmpty: cart.length != 0,
+        totalPrice: totalPrice
+      });
+    } catch (e) {
+      res.render("/cart", { error: e });
+    }
+  }
+});
+
+router.post("/cart", async (req, res) => {
+  if (authenticatedSessions[req.session.id] == undefined) {
+    res.redirect("/login");
+  } else {
+    try {
+      const user = await users.getByUsername(
+        authenticatedSessions[req.session.id]
+      );
+      await users.clearCart(user._id);
+      res.redirect("/cart");
+    } catch (e) {
+      res.render("main/cart", { error: e });
+    }
+  }
+});
+
 router.get("/signup", (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
     res.render("auth/signup", {});

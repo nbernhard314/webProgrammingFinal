@@ -2,7 +2,6 @@ const data = require("../data");
 const users = data.users;
 const products = data.products;
 const collections = require("./mongoCollections");
-const dbConnection = require("./mongoConnection");
 
 async function run() {
   collections.clearCollections();
@@ -19,7 +18,7 @@ async function run() {
       password: "password"
     });
 
-    console.log(adam._id);
+    // console.log(adam._id);
 
     let bagels = await products.createProduct({
       itemName: "Bagels on the Hudson",
@@ -29,10 +28,23 @@ async function run() {
       peopleAlsoBought: []
     });
 
-    console.log(bagels._id);
+    let naps = await products.createProduct({
+      itemName: "Napoli's",
+      description: "Good Pizza on Washington",
+      imagePath: "../public/images/pizza.jpg",
+      price: "10",
+      peopleAlsoBought: []
+    });
+
+    // console.log(bagels._id);
+    // console.log(naps._id);
+    await users.addToCart(adam._id, bagels._id);
+    await users.addToCart(adam._id, naps._id);
+    console.log("seed complete");
   } catch (e) {
-    console.log(e);
+    console.log("Error: " + e);
   }
+
   process.exit(0);
 }
 

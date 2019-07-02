@@ -65,7 +65,9 @@ let exportFunctions = {
       throw "Must provide username ";
     }
     const allUsers = await users();
-    const result = await allUsers.findOne({ username: username });
+    const result = await allUsers.findOne({
+      username: username.toLocaleLowerCase()
+    });
     if (result === null) throw "No user with that id";
     return result;
   },
@@ -165,7 +167,7 @@ let exportFunctions = {
     return await this.getByID(id);
   },
   async clearCart(id) {
-    if (!id || !productID) {
+    if (!id) {
       throw "Must provide ID and Product ID";
     }
     let user = await this.getByID(id);
