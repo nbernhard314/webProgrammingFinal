@@ -31,6 +31,12 @@ let exportedFunctions = {
     return await this.getByID(newId);
   },
 
+  async getAllProducts() {
+    const allProducts = await products();
+    const result = await allProducts.find({}).toArray();
+    return result;
+  },
+
   async getByID(id) {
     if (!id) {
       throw "Must provide ID ";

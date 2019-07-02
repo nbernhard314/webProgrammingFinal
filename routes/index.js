@@ -9,17 +9,15 @@ let authenticatedSessions = {};
 
 router.get("/", (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
-    res.render("main/home", {});
+    res.render("main/home", { authenticated: false });
   } else {
-    res.render("main/home", {
-      username: authenticatedSessions[req.session.id]
-    });
+    res.render("main/home", { authenticated: true });
   }
 });
 
 router.get("/login", (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
-    res.render("auth/login", {});
+    res.render("auth/login", { authenticated: false });
   } else {
     res.redirect("/");
   }
@@ -94,14 +92,15 @@ router.post("/product/:id", async (req, res) => {
   //This post is to add product to cart. The add to cart button should only
   //be visible to logged in users.
   const productID = req.params.id;
+  console.log(productID);
   if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/error", { error: "No user logged in" });
   } else {
     try {
-      username = authenticatedSessions[req.session.id];
-      userID = users.getByUsername(username)._id;
-      updatedUser = users.addToCart(userID, productID);
-      res.render("main/cart", { user: updatedUser });
+      const username = authenticatedSessions[req.session.id];
+      const user = await users.getByUsername(username);
+      updatedUser = users.addToCart(user._id, productID);
+      res.redirect("/cart");
     } catch (e) {
       res.render("main/error", { error: e });
     }
@@ -133,7 +132,8 @@ router.get("/cart", async (req, res) => {
           };
         }),
         notEmpty: cart.length != 0,
-        totalPrice: totalPrice
+        totalPrice: totalPrice,
+        authenticated: true
       });
     } catch (e) {
       res.render("/cart", { error: e });
@@ -163,6 +163,22 @@ router.get("/signup", (req, res) => {
   } else {
     res.redirect("/");
   }
+});
+
+router.get("/all", async (req, res) => {
+  const allProducts = await products.getAllProducts();
+  res.render("main/all", {
+    item: allProducts.map(item => {
+      return {
+        itemName: item.itemName,
+        price: item.price,
+        id: item._id,
+        imagePath: item.imagePath
+      };
+    }),
+    notEmpty: allProducts.length != 0,
+    authenticated: authenticatedSessions[req.session.id] != undefined
+  });
 });
 
 router.post("/signup", async (req, res) => {

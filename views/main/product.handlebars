@@ -9,6 +9,7 @@
     </div>
     {{#if product }}
     <div class="form-group">
+        <img src="{{imagePath}}">
         <div class="alert alert-success">
             <dl>
                 <dt>Item Name:</dt>
@@ -17,16 +18,15 @@
                 <dd>{{description}}</dd>
                 <dt>Price:</dt>
                 <dd>{{price}}</dd>
-                <dt>Image Path:</dt>
-                <dd>{{imagePath}}</dd>
             </dl>
         </div>
     </div>
     {{/if}}
     {{#if authenticated}}
-    <div class="add-to-cart">
-        <p>add to cart</p>
-        {{!-- TODO ADD TO CART BUTTON --}}
-    </div>
+    <form class="server-form" method="post">
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Add To Cart</button>
+        </div>
+    </form>
     {{/if}}
 </div>

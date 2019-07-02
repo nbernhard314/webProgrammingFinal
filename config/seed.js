@@ -23,7 +23,7 @@ async function run() {
     let bagels = await products.createProduct({
       itemName: "Bagels on the Hudson",
       description: "Okayest bagels in town!",
-      imagePath: "../public/images/bagels.png",
+      imagePath: "../../public/images/bagels.png",
       price: "5",
       peopleAlsoBought: []
     });
@@ -31,7 +31,7 @@ async function run() {
     let naps = await products.createProduct({
       itemName: "Napoli's",
       description: "Good Pizza on Washington",
-      imagePath: "../public/images/pizza.jpg",
+      imagePath: "../../public/images/pizza.jpg",
       price: "10",
       peopleAlsoBought: []
     });

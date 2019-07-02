@@ -1,0 +1,17 @@
+<h2>All Products</h2>
+{{#if error}}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{{/if}}
+
+{{#if notEmpty }}
+<div class="products">
+    <ul>
+        {{#each item}}
+        <img src="{{imagePath}}">
+        <li> <a href="/product/{{id}}"> {{itemName}} </a> Price: ${{price}}</li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}
