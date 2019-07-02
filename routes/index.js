@@ -110,17 +110,14 @@ router.post("/product/:id", async (req, res) => {
 
 router.get("/signup", (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
-    res.render("main/error", { error: "cannot be signed in and sign up." });
-  } else {
     res.render("auth/signup", {});
+  } else {
+    res.redirect("/");
   }
 });
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
-    res.render("main/error", { error: "cannot be signed in and sign up." });
-  } else {
-    //TODO: use client side JS to make sure fields are filled in properly.
     const newUser = {
       username: req.body.username.toLowerCase(),
       password: req.body.password,
@@ -133,13 +130,14 @@ router.post("/signup", (req, res) => {
       zip: req.body.zip
     };
     try {
-      let user = users.createUser(newUser);
-      res.redirect("/login", {
-        message: `user ${user.username} created successfully.`
-      });
+      let user = await users.createUser(newUser);
+      res.redirect("/login");
     } catch (e) {
       res.render("auth/signup", { error: e });
     }
+  } else {
+    //TODO: use client side JS to make sure fields are filled in properly.
+    res.render("main/error", { error: "cannot sign up when logged in." });
   }
 });
 

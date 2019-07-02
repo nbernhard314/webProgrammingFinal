@@ -20,9 +20,16 @@ let exportFunctions = {
     ) {
       throw TypeError("Wrong type provided");
     }
+    let duplicate = undefined;
+    try {
+      duplicate = await this.getByUsername(userObj.username.toLowerCase());
+    } catch (e) {
+      //this means there is no duplicate username
+    }
+    if (duplicate != undefined) throw "cannot have duplicate username";
     const hashedPw = await bcrypt.hash(userObj.password, saltRounds);
     let newUser = {
-      username: userObj.username,
+      username: userObj.username.toLowerCase(),
       firstName: userObj.firstName,
       lastName: userObj.lastName,
       email: userObj.email,

@@ -2,6 +2,7 @@ const data = require("../data");
 const users = data.users;
 const products = data.products;
 const collections = require("./mongoCollections");
+const dbConnection = require("./mongoConnection");
 
 async function run() {
   collections.clearCollections();
@@ -32,6 +33,7 @@ async function run() {
   } catch (e) {
     console.log(e);
   }
+  process.exit(0);
 }
 
 run();

@@ -8,7 +8,6 @@ const configRoutes = require("./routes");
 const exphbs = require("express-handlebars");
 
 const Handlebars = require("handlebars");
-const users = require("./data/users");
 
 const handlebarsInstance = exphbs.create({
   defaultLayout: "main",
