@@ -44,6 +44,17 @@ async function run() {
         postedBy: "adam"
       })
     );
+    let rachel = await users.createUser({
+      username: "rcipkins",
+      firstName: "Rachel",
+      lastName: "Cipkins",
+      address: "1 Castle Point",
+      address2: "S-1234",
+      city: "Hoboken",
+      zip: "07030",
+      email: "rachel@gotmail.net",
+      password: "pass1234"
+    });
     // console.log(bagels._id);
     // console.log(naps._id);
     console.log("seed complete");
