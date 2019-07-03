@@ -19,13 +19,42 @@
                 <dt>Price:</dt>
                 <dd>{{price}}</dd>
             </dl>
+            {{#if authenticated}}
+            <form class="server-form" method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Add To Cart</button>
+                </div>
+            </form>
+            {{/if}}
+        </div>
+        <div class="reviews">
+            <h3>Reviews</h3>
+            {{#each review}}
+            <h5>{{title}}</h5>
+            <ul>
+                <li>Rating: {{rating}}/5</li>
+                <li>Posted By: {{postedBy}}</li>
+                <li>Comment: {{comment}}</li>
+            </ul>
+            {{/each}}
         </div>
     </div>
     {{/if}}
     {{#if authenticated}}
     <form class="server-form" method="post">
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Add To Cart</button>
+            <label for="title">Review Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{title}}">
+
+            <label for="rating">Rating</label>
+            <input type="number" class="form-control" id="rating" name="rating" value="{{rating}}">
+
+            <label for="comment">Comment</label>
+            <input type="text" class="form-control" id="comment" name="comment" value="{{comment}}">
+
+
+            <button type="submit" class="btn btn-default">Submit Review</button>
+
         </div>
     </form>
     {{/if}}

@@ -64,45 +64,57 @@ router.get("/product/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const product = await products.getByID(id);
-    if (authenticatedSessions[req.session.id] == undefined) {
-      res.render("main/product", {
-        product: product,
-        authenticated: false,
-        itemName: product.itemName,
-        description: product.description,
-        price: product.price,
-        imagePath: product.imagePath
-      });
-    } else {
-      res.render("main/product", {
-        product: product,
-        authenticated: true,
-        itemName: product.itemName,
-        description: product.description,
-        price: product.price,
-        imagePath: product.imagePath
-      });
-    }
+    res.render("main/product", {
+      review: product.reviews.map(review => {
+        return {
+          title: review.title,
+          rating: review.rating,
+          comment: review.comment,
+          postedBy: review.postedBy
+        };
+      }),
+      product: product,
+      authenticated: authenticatedSessions[req.session.id] != undefined,
+      itemName: product.itemName,
+      description: product.description,
+      price: product.price,
+      imagePath: product.imagePath
+    });
   } catch (e) {
     res.render("main/error", { error: e });
   }
 });
 
 router.post("/product/:id", async (req, res) => {
-  //This post is to add product to cart. The add to cart button should only
-  //be visible to logged in users.
   const productID = req.params.id;
-  console.log(productID);
   if (authenticatedSessions[req.session.id] == undefined) {
     res.render("main/error", { error: "No user logged in" });
   } else {
-    try {
-      const username = authenticatedSessions[req.session.id];
-      const user = await users.getByUsername(username);
-      updatedUser = users.addToCart(user._id, productID);
-      res.redirect("/cart");
-    } catch (e) {
-      res.render("main/error", { error: e });
+    if (!Object.keys(req.body).length) {
+      //this means the POST is add to cart
+      try {
+        const username = authenticatedSessions[req.session.id];
+        const user = await users.getByUsername(username);
+        updatedUser = users.addToCart(user._id, productID);
+        res.redirect("/cart");
+      } catch (e) {
+        res.render("main/error", { error: e });
+      }
+    } else {
+      //this means POST is add review
+      //TODO: use client side JS to make sure fields are filled in properly.
+      try {
+        const newReview = {
+          title: req.body.title,
+          rating: req.body.rating,
+          comment: req.body.comment,
+          postedBy: authenticatedSessions[req.session.id]
+        };
+        await products.addReview(productID, newReview);
+        res.redirect("back");
+      } catch (e) {
+        res.render("main/error", { error: e });
+      }
     }
   }
 });

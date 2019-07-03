@@ -4,7 +4,7 @@ const products = data.products;
 const collections = require("./mongoCollections");
 
 async function run() {
-  collections.clearCollections();
+  await collections.clearCollections();
   try {
     let adam = await users.createUser({
       username: "adam",
@@ -36,10 +36,16 @@ async function run() {
       peopleAlsoBought: []
     });
 
+    console.log(
+      await products.addReview(naps._id, {
+        title: "Best Pizza",
+        rating: "5",
+        comment: "Have the vodka slice",
+        postedBy: "adam"
+      })
+    );
     // console.log(bagels._id);
     // console.log(naps._id);
-    await users.addToCart(adam._id, bagels._id);
-    await users.addToCart(adam._id, naps._id);
     console.log("seed complete");
   } catch (e) {
     console.log("Error: " + e);

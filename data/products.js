@@ -1,6 +1,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const products = mongoCollections.products;
 const mongo = require("mongodb");
+const users = require("./users");
 
 let exportedFunctions = {
   async createProduct(prodObj) {
@@ -20,7 +21,7 @@ let exportedFunctions = {
       price: prodObj.price,
       imagePath: prodObj.imagePath,
       peopleAlsoBought: prodObj.peopleAlsoBought,
-      reviews: {}
+      reviews: []
     };
 
     const allProducts = await products();
@@ -70,8 +71,13 @@ let exportedFunctions = {
     ) {
       throw "Wrong type provided for review";
     }
-    let objID = mongo.ObjectID(id);
-    let product = await this.getByID(objID);
+    try {
+      const user = await users.getByUsername(reviewObj.postedBy);
+    } catch {
+      throw `User with username ${reviewObj.postedBy} does not exist.`;
+    }
+    const objID = mongo.ObjectID(id);
+    const product = await this.getByID(objID);
     let newReviews = product.reviews;
     newReviews.push(reviewObj);
     let newProduct = {
@@ -85,6 +91,7 @@ let exportedFunctions = {
     if (updateRet.modifiedCount === 0) {
       throw "could not update cart successfully";
     }
+
     return await this.getByID(id);
   },
 

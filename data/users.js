@@ -189,7 +189,6 @@ let exportFunctions = {
     try {
       const user = await this.getByUsername(username);
       const hash = user["password"];
-      console.log(hash);
       if (await bcrypt.compare(password, hash)) {
         return true;
       }
