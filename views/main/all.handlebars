@@ -1,17 +1,23 @@
-<h2>All Products</h2>
-{{#if error}}
-<div class="alert alert-danger">
-    {{ error }}
-</div>
-{{/if}}
+<div class = "all">
+    <h2>All Products</h2>
+    {{#if error}}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {{/if}}
 
-{{#if notEmpty }}
-<div class="products">
-    <ul>
-        {{#each item}}
-        <img src="{{imagePath}}">
-        <li> <a href="/product/{{id}}"> {{itemName}} </a> Price: ${{price}}</li>
-        {{/each}}
-    </ul>
+    {{#if notEmpty }}
+    <div class="products">
+        <ul>
+            {{#each item}}  
+            <li> 
+                <h3>{{itemName}}</h3> </br>
+                
+                <a href="/product/{{id}}"> <img href="/product/{{id}}" src="{{imagePath}}"> </a>  </br> 
+                Price: ${{price}} 
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
 </div>
-{{/if}}
