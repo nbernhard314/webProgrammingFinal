@@ -1,141 +1,149 @@
-*{
-	font-family: 'Courier New', Courier, monospace;
+* {
+  font-family: "Courier New", Courier, monospace;
 }
 
 .container h1 {
-	margin-top: 200px;
-	text-align: center;
+  margin-top: 200px;
+  text-align: center;
 }
 
 /* HOME PAGE */
 #home {
-	text-align: center;
+  text-align: center;
 }
 
 #home h3 {
-	padding: 50px;
+  padding: 50px;
 }
 .dropbtn {
-	background-color: darkslategray;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-	border-radius: 5px;
-	min-width: 400px;
-  }
-  
-  .dropdown {
-	position: relative;
-	display: inline-block;
-	text-align: center;
-  }
-  
-  .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 400px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-  }
-  
-  .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #ddd;}
-  
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  .dropdown:hover .dropbtn {background-color: grey;}
+  background-color: darkslategray;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  min-width: 400px;
+}
+.dropbtn:hover {
+  background-color: rgb(74, 247, 189);
+  color: black;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
 
-  #popular {
-	  padding: 5rem;
-  }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 400px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: grey;
+}
+
+#popular {
+  padding: 5rem;
+}
 /***********************************************************/
 
 /* LOGIN and SIGNUP PAGE  */
 
-#login-page, #signup-page{
-	padding-top: 5rem;
-	max-width: 500px;
+#login-page,
+#signup-page {
+  padding-top: 5rem;
+  max-width: 500px;
 }
 
-#login-page p,  #signup-page p{
-	font-size: 20px;
-	
+#login-page p,
+#signup-page p {
+  font-size: 20px;
 }
 
-#login-page .btn, #signup-page .btn{
-	background-color:darkslategray;
-	color: white;
+#login-page .btn,
+#signup-page .btn {
+  background-color: darkslategray;
+  color: white;
 }
 label {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 /***************************/
 
 /* NAVBAR MAIN PAGE */
 .nav-link {
-	color: white;
-	font-size: 20px;
+  color: white;
+  font-size: 20px;
 }
 
-.nav-link:hover, .nav-link:active{
-	background-color: white;
-	color: black;
-
+.nav-link:hover,
+.nav-link:active {
+  background-color: white;
+  color: black;
 }
 
 nav {
-	padding: 15px;
-	background-color: grey;
+  padding: 15px;
+  background-color: grey;
 }
 
 .navbar-nav > li {
-	margin-left: 15px;
-  	margin-right: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 /****************************/
 
 /* ALL PAGE */
 
-.all h2{
-	padding: 2rem;
-
+.all h2 {
+  padding: 2rem;
 }
 
 .all ul {
-	list-style: none;
+  list-style: none;
 }
 
-
 .all h2 {
-	text-align: center;
+  text-align: center;
 }
 
 .products {
-	text-align: center;
+  text-align: center;
 }
 
 .products li {
-	padding: 2rem;
+  padding: 2rem;
 }
 
 .all img:hover {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 @media only screen and (max-width: 600px) {
-	.all img {
-		width: 90%;
-		heigth: auto;
-	}
+  .all img {
+    width: 90%;
+    heigth: auto;
+  }
 }
-
