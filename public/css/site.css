@@ -144,6 +144,6 @@ nav {
 @media only screen and (max-width: 600px) {
   .all img {
     width: 90%;
-    heigth: auto;
+    height: auto;
   }
 }
