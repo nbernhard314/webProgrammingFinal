@@ -28,6 +28,21 @@ async function run() {
       peopleAlsoBought: []
     });
 
+    let nyc = await products.createProduct({
+      itemName: "Empire State Building",
+      description: "Its pretty tall",
+      imagePath: "../../public/images/empire.jpg",
+      price: "100",
+      peopleAlsoBought: []
+    });
+    let StreetDog = await products.createProduct({
+      itemName: "Authentic NYC Street Hotdog",
+      description: "Street Meat!",
+      imagePath: "../../public/images/hotdog.jpg",
+      price: "1",
+      peopleAlsoBought: []
+    });
+
     let naps = await products.createProduct({
       itemName: "Napoli's",
       description: "Good Pizza on Washington",
@@ -36,14 +51,12 @@ async function run() {
       peopleAlsoBought: []
     });
 
-    console.log(
-      await products.addReview(naps._id, {
-        title: "Best Pizza",
-        rating: "5",
-        comment: "Have the vodka slice",
-        postedBy: "adam"
-      })
-    );
+    await products.addReview(naps._id, {
+      title: "Best Pizza",
+      rating: "5",
+      comment: "Have the vodka slice",
+      postedBy: "adam"
+    });
     let rachel = await users.createUser({
       username: "rcipkins",
       firstName: "Rachel",

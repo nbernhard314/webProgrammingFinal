@@ -102,7 +102,6 @@ router.post("/product/:id", async (req, res) => {
       }
     } else {
       //this means POST is add review
-      //TODO: use client side JS to make sure fields are filled in properly.
       try {
         const newReview = {
           title: req.body.title,
@@ -213,7 +212,6 @@ router.post("/signup", async (req, res) => {
       res.render("auth/signup", { error: e });
     }
   } else {
-    //TODO: use client side JS to make sure fields are filled in properly.
     res.render("main/error", { error: "cannot sign up when logged in." });
   }
 });
