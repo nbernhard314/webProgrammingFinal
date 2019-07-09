@@ -35,11 +35,13 @@
 
 
     </div>
+
+    <div class="error alert alert-danger">
+
+    </div>
     {{#if error}}
     <div class="alert alert-danger">
-      <div class="error">
-        {{ error }}
-      </div>
+      {{ error }}
     </div>
     {{/if}}
     <div class="form-group">
@@ -48,17 +50,3 @@
   </form>
 </div>
 <script src="../../public/js/signup.js"></script>
-<!--
-newUser = {
-      username: req.body.username.toLowerCase(),
-      password: req.body.password,
-      email: req.body.email,
-      address: req.body.address,
-      address2: req.body.address2,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      city: req.body.city,
-      zip: req.body.zip
-    };
-
-    -->
