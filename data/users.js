@@ -189,6 +189,25 @@ let exportFunctions = {
     return await this.getByID(id);
   },
 
+  async updateCart(id, newCart) {
+    if (!id || !newCart) {
+      throw "Must provide ID and Product ID";
+    }
+    let user = await this.getByID(id);
+    let newUser = {
+      cart: newCart
+    };
+    const allUsers = await users();
+    const updateRet = await allUsers.updateOne(
+      { _id: user._id },
+      { $set: newUser }
+    );
+    if (updateRet.modifiedCount === 0) {
+      throw "could not update cart successfully";
+    }
+    return await this.getByID(id);
+  },
+
   async checkLogin(username, password) {
     try {
       const user = await this.getByUsername(username);

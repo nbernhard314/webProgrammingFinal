@@ -166,7 +166,7 @@ router.get("/cart", async (req, res) => {
       for (let c in cart) {
         let p = await products.getByID(c);
         items.push(p);
-        totalPrice += parseFloat(p.price * cart[c]);
+        totalPrice += parseFloat(p.price) * parseFloat(cart[c]);
       }
       res.render("main/cart", {
         item: items.map(item => {
@@ -182,7 +182,7 @@ router.get("/cart", async (req, res) => {
         authenticated: true
       });
     } catch (e) {
-      res.render("/cart", { error: e });
+      res.render("main/cart", { error: e });
     }
   }
 });
@@ -195,8 +195,14 @@ router.post("/cart", async (req, res) => {
       const user = await users.getByUsername(
         authenticatedSessions[req.session.id]
       );
-      await users.clearCart(user._id);
-      res.redirect("/cart");
+      if (!Object.keys(req.body).length) {
+        await users.clearCart(user._id);
+        res.redirect("/cart");
+      } else {
+        let obj = JSON.parse(JSON.stringify(req.body));
+        await users.updateCart(user._id, obj);
+        res.redirect("/cart");
+      }
     } catch (e) {
       res.render("main/cart", { error: e });
     }
