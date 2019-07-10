@@ -78,21 +78,21 @@ async function run() {
     let epcot = await products.createProduct({
       itemName: "Epcot",
       description: "Travel around the world in just a few hours!",
-      imagePath: "../../public/images/epcot.jpg",
+      imagePath: "../../public/images/epcot.png",
       price: "200",
       peopleAlsoBought: []
     });
     let animalKingdom = await products.createProduct({
       itemName: "Animal Kingdom",
       description: "Lots of animals to see!",
-      imagePath: "../../public/images/animalkingdom.jpg",
+      imagePath: "../../public/images/animalkingdom.png",
       price: "200",
       peopleAlsoBought: []
     });
     let hollyWoodStudios = await products.createProduct({
       itemName: "Hollywood Studios",
       description: "Knockoff Universal Studios!",
-      imagePath: "../../public/images/hollywoodstudios.jpg",
+      imagePath: "../../public/images/hollywoodstudios.png",
       price: "200",
       peopleAlsoBought: []
     });
