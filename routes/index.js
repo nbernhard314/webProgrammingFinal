@@ -163,20 +163,21 @@ router.get("/cart", async (req, res) => {
       const cart = user.cart;
       const items = [];
       let totalPrice = 0;
-      for (let i = 0; i < cart.length; i++) {
-        let p = await products.getByID(cart[i]);
+      for (let c in cart) {
+        let p = await products.getByID(c);
         items.push(p);
-        totalPrice += parseFloat(p.price);
+        totalPrice += parseFloat(p.price * cart[c]);
       }
       res.render("main/cart", {
         item: items.map(item => {
           return {
             itemName: item.itemName,
             price: item.price,
-            id: item._id
+            id: item._id,
+            quantity: cart[item._id]
           };
         }),
-        notEmpty: cart.length != 0,
+        notEmpty: Object.keys(cart).length != 0,
         totalPrice: totalPrice,
         authenticated: true
       });
@@ -200,6 +201,12 @@ router.post("/cart", async (req, res) => {
       res.render("main/cart", { error: e });
     }
   }
+});
+
+//TODO: Implement update cart
+router.put("/cart/:id", async (req, res) => {
+  console.log(req.params.id);
+  res.redirect("back");
 });
 
 router.get("/signup", (req, res) => {

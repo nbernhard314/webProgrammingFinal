@@ -97,6 +97,13 @@ label {
   font-size: 20px;
 }
 
+.cartItem input {
+  position: relative;
+  width: 35px;
+}
+.cartItem label {
+  position: right;
+}
 .nav-link:hover,
 .nav-link:active {
   background-color: white;

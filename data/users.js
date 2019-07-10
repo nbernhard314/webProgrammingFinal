@@ -38,7 +38,7 @@ let exportFunctions = {
       city: userObj.city,
       zip: userObj.zip,
       password: hashedPw,
-      cart: []
+      cart: {}
     };
 
     const allUsers = await users();
@@ -127,7 +127,7 @@ let exportFunctions = {
       newUser["password"] = await bcrypt.hash(userObj["password"], saltRounds);
       hasFields = true;
     }
-    if (userObj["cart"] && userObj["cart"] instanceof Array) {
+    if (userObj["cart"] && userObj["cart"] instanceof Object) {
       newUser["cart"] = userObj["cart"];
       hasFields = true;
     }
@@ -152,7 +152,11 @@ let exportFunctions = {
     }
     let user = await this.getByID(id);
     let newCart = user.cart;
-    newCart.push(productID);
+    if (newCart[productID]) {
+      newCart[productID] = newCart[productID] + 1;
+    } else {
+      newCart[productID] = 1;
+    }
     let newUser = {
       cart: newCart
     };
@@ -172,7 +176,7 @@ let exportFunctions = {
     }
     let user = await this.getByID(id);
     let newUser = {
-      cart: []
+      cart: {}
     };
     const allUsers = await users();
     const updateRet = await allUsers.updateOne(
