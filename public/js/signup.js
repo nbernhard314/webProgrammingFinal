@@ -5,6 +5,7 @@
   errorDiv.hide();
 
   form.submit(function(event) {
+    errorDiv.empty();
     let $inputs = $(".form-group :input");
     values = {};
     errors = [];

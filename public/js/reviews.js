@@ -1,11 +1,11 @@
 (function($) {
-  let review = $(".server-form");
+  let review = $("#reviewform");
   let errorDiv = $(".error");
-  // console.log(errorDiv);
   errorDiv.hide();
 
   review.submit(function(event) {
     let $inputs = $(".form-group :input");
+    errorDiv.empty();
     values = {};
     errors = [];
     $inputs.each(function() {
@@ -28,7 +28,6 @@
     if (errors.length > 0) {
       errorDiv.show();
       event.preventDefault();
-      errorDiv.show();
       let ul = "<ul class='errorList'> </ul>";
       errorDiv.append("<h6>Errors:</h6>");
       errorDiv.append(ul);
