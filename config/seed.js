@@ -35,7 +35,7 @@ async function run() {
       price: "100",
       peopleAlsoBought: []
     });
-    let StreetDog = await products.createProduct({
+    let streetDog = await products.createProduct({
       itemName: "Authentic NYC Street Hotdog",
       description: "Street Meat!",
       imagePath: "../../public/images/hotdog.jpg",
