@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require("../data");
 const users = data.users;
 const products = data.products;
+const xss = require("xss");
 
 //Add authenticated sessions with format {"sessionID":"username"}
 let authenticatedSessions = {};
@@ -15,6 +16,39 @@ router.get("/", (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  const searchTerm = xss(req.body.search.trim());
+  if (!searchTerm) {
+    res.status(401).render("main/home", {
+      error: "Must provide search term."
+    });
+    return;
+  }
+  try {
+    //TODO: Need to fix this, search function is not working.
+    const results = await products.search(searchTerm);
+    if (results.length == 0) {
+      res.render("main/home", {
+        error: "No results found."
+      });
+    } else {
+      res.render("main/home", {
+        results: results,
+        result: results.map(result => {
+          return {
+            itemName: result.itemName,
+            id: result._id
+          };
+        })
+      });
+    }
+  } catch (e) {
+    res.render("main/home", {
+      error: e
+    });
+  }
+});
+
 router.get("/login", (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
     res.render("auth/login", { authenticated: false });
@@ -24,8 +58,8 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const username = req.body.username.toLowerCase();
-  const password = req.body.password;
+  const username = xss(req.body.username.toLowerCase().trim());
+  const password = xss(req.body.password);
   if (!username || !password) {
     res.status(401).render("auth/login", {
       error: "Must provide a username and password."
@@ -104,9 +138,9 @@ router.post("/product/:id", async (req, res) => {
       //this means POST is add review
       try {
         const newReview = {
-          title: req.body.title,
-          rating: req.body.rating,
-          comment: req.body.comment,
+          title: xss(req.body.title.trim()),
+          rating: xss(req.body.rating.trim()),
+          comment: xss(req.body.comment.trim()),
           postedBy: authenticatedSessions[req.session.id]
         };
         await products.addReview(productID, newReview);
@@ -195,15 +229,15 @@ router.get("/all", async (req, res) => {
 router.post("/signup", async (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
     const newUser = {
-      username: req.body.username.toLowerCase(),
-      password: req.body.password,
-      email: req.body.email,
-      address: req.body.address,
-      address2: req.body.address2,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      city: req.body.city,
-      zip: req.body.zip
+      username: xss(req.body.username.toLowerCase().trim()),
+      password: xss(req.body.password),
+      email: xss(req.body.email.trim()),
+      address: xss(req.body.address.trim()),
+      address2: xss(req.body.address2.trim()),
+      firstName: xss(req.body.firstName.trim()),
+      lastName: xss(req.body.lastName.trim()),
+      city: xss(req.body.city.trim()),
+      zip: xss(req.body.zip)
     };
     try {
       let user = await users.createUser(newUser);

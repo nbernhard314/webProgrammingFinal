@@ -2,11 +2,36 @@
 
   <h3>Find Fun Things To Do While Traveling</h3>
 
+  <div id="search">
+    {{#if error}}
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+    {{/if}}
+    <form class="server-form" method="post">
+      <div class="form-group">
+        <label for="search">Search for a Product:</label>
+        <input type="text" class="form-control" id="search" name="search" value="{{search}}">
+        <button type="submit" class="btn btn-default">Search</button>
+
+      </div>
+    </form>
+  </div>
+
   <!-- DROP DOWN MENU FOR ALL POSSIBLE DESTINATIONS -->
   <div class="allbutton">
     <button onclick="window.location.href='/all'" class="dropbtn">CHOOSE YOUR DESTINATION</button>
   </div>
-
+  {{#if results}}
+  <div class="results">
+    <h4>Search Results</h4>
+    <ul>
+      {{#each result}}
+      <li><a href="/product/{{id}}">{{itemName}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
 
   <!-- SECTION FOR MOST POPULAR ITEMS -->
   <div id="popular">

@@ -103,7 +103,7 @@ let exportedFunctions = {
     const allProducts = await products();
     const list = await allProducts
       .find({
-        $or: [{ title: regex }, { description: regex }]
+        $or: [{ itemName: regex }, { description: regex }]
       })
       .toArray();
     return list;
