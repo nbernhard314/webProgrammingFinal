@@ -68,9 +68,35 @@ async function run() {
       email: "rachel@gotmail.net",
       password: "pass1234"
     });
-    // console.log(bagels._id);
-    // console.log(naps._id);
-    console.log("seed complete");
+    let magicKingdom = await products.createProduct({
+      itemName: "Magic Kingdom",
+      description: "Very magical.",
+      imagePath: "../../public/images/magickingdom.jpg",
+      price: "200",
+      peopleAlsoBought: []
+    });
+    let epcot = await products.createProduct({
+      itemName: "Epcot",
+      description: "Travel around the world in just a few hours!",
+      imagePath: "../../public/images/epcot.png",
+      price: "200",
+      peopleAlsoBought: []
+    });
+    let animalKingdom = await products.createProduct({
+      itemName: "Animal Kingdom",
+      description: "Lots of animals to see!",
+      imagePath: "../../public/images/animalkingdom.png",
+      price: "200",
+      peopleAlsoBought: []
+    });
+    let hollyWoodStudios = await products.createProduct({
+      itemName: "Hollywood Studios",
+      description: "Knockoff Universal Studios!",
+      imagePath: "../../public/images/hollywoodstudios.png",
+      price: "200",
+      peopleAlsoBought: []
+    });
+    console.log("Seed complete.");
   } catch (e) {
     console.log("Error: " + e);
   }
