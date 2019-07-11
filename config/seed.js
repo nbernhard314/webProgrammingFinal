@@ -86,14 +86,14 @@ async function run() {
     let animalKingdom = await products.createProduct({
       itemName: "Animal Kingdom",
       description: "Lots of animals to see!",
-      imagePath: "../../public/images/animalkingdom.png",
+      imagePath: "../../public/images/animalkingdom.jpg",
       price: "200",
       peopleAlsoBought: []
     });
     let hollyWoodStudios = await products.createProduct({
       itemName: "Hollywood Studios",
       description: "Knockoff Universal Studios!",
-      imagePath: "../../public/images/hollywoodstudios.png",
+      imagePath: "../../public/images/hollywoodstudios.jpg",
       price: "200",
       peopleAlsoBought: []
     });

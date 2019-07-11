@@ -63,9 +63,12 @@
 }
 
 #popular {
-  padding: 5rem;
+  padding: 1rem;
 }
 
+#search {
+  padding: 1rem;
+}
 .results h4 {
   font-size: 24pt;
   font-weight: bold;
@@ -73,6 +76,14 @@
 
 .results p {
   font-size: 14pt;
+}
+
+#searchLabel {
+  font-size: 20pt;
+}
+
+#searchButton {
+  margin-top: 5pt;
 }
 /***********************************************************/
 
@@ -169,10 +180,19 @@ nav {
 /* PRODUCT PAGE */
 
 #reviewform {
-  margin: 5pt;
+  margin-top: 0pt;
+  margin-left: 5pt;
   padding: 2pt;
 }
 
 #reviewform button {
   margin-top: 5pt;
+}
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
