@@ -42,7 +42,7 @@ async function run() {
       price: "1",
       peopleAlsoBought: []
     });
-
+    
     let naps = await products.createProduct({
       itemName: "Napoli's",
       description: "Good Pizza on Washington",
