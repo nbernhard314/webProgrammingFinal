@@ -280,7 +280,8 @@ router.get("/all", async (req, res) => {
         itemName: item.itemName,
         price: item.price,
         id: item._id,
-        imagePath: item.imagePath
+        imagePath: item.imagePath,
+        alt: item.alt
       };
     }),
     notEmpty: allProducts.length != 0,

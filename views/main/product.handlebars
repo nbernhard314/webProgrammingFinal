@@ -9,7 +9,7 @@
 
     {{#if product }}
     <div class="form-group">
-        <img src="{{imagePath}}">
+        <img src="{{imagePath}}" alt="{{alt}}">
         <div class="alert alert-success">
             <dl>
                 <dt>Item Name:</dt>
@@ -28,7 +28,7 @@
             {{/if}}
         </div>
         <div class="reviews">
-            <h3>Reviews</h3>
+            <h2>Reviews</h2>
             {{#each review}}
             <h5>{{title}}</h5>
             <ul>

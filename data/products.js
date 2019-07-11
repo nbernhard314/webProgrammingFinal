@@ -11,6 +11,7 @@ let exportedFunctions = {
       typeof prodObj.description != "string" ||
       typeof prodObj.price != "string" ||
       typeof prodObj.imagePath != "string" ||
+      typeof prodObj.alt != "string" ||
       !prodObj.peopleAlsoBought instanceof Array
     ) {
       throw TypeError("Wrong type provided.");
@@ -20,6 +21,7 @@ let exportedFunctions = {
       description: prodObj.description,
       price: prodObj.price,
       imagePath: prodObj.imagePath,
+      alt: prodObj.alt,
       peopleAlsoBought: prodObj.peopleAlsoBought,
       reviews: []
     };

@@ -121,7 +121,7 @@ label {
 
 nav {
   padding: 15px;
-  background-color: grey;
+  background-color: #767676;
 }
 
 .navbar-nav > li {
@@ -179,4 +179,8 @@ img {
 
 #reviewform button {
   margin-top: 5pt;
+}
+
+a {
+  color: #0072ee;
 }

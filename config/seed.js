@@ -25,6 +25,7 @@ async function run() {
       itemName: "Bagels on the Hudson",
       description: "Okayest bagels in town!",
       imagePath: "../../public/images/bagels.png",
+      alt: "Bagels on the hudson",
       price: "5",
       peopleAlsoBought: []
     });
@@ -33,6 +34,7 @@ async function run() {
       itemName: "Empire State Building",
       description: "Its pretty tall",
       imagePath: "../../public/images/empire.jpg",
+      alt: "empire state building",
       price: "100",
       peopleAlsoBought: []
     });
@@ -40,6 +42,7 @@ async function run() {
       itemName: "Authentic NYC Street Hotdog",
       description: "Street Meat!",
       imagePath: "../../public/images/hotdog.jpg",
+      alt: "Authentic NYC Street Hotdog",
       price: "1",
       peopleAlsoBought: []
     });
@@ -48,6 +51,7 @@ async function run() {
       itemName: "Napoli's",
       description: "Good Pizza on Washington",
       imagePath: "../../public/images/pizza.jpg",
+      alt: "Napoli's",
       price: "10",
       peopleAlsoBought: []
     });
@@ -73,6 +77,7 @@ async function run() {
       itemName: "Magic Kingdom",
       description: "Very magical.",
       imagePath: "../../public/images/magickingdom.jpg",
+      alt: "Magic Kingdom",
       price: "200",
       peopleAlsoBought: []
     });
@@ -80,6 +85,7 @@ async function run() {
       itemName: "Epcot",
       description: "Travel around the world in just a few hours!",
       imagePath: "../../public/images/epcot.png",
+      alt: "Epcot",
       price: "200",
       peopleAlsoBought: []
     });
@@ -87,6 +93,7 @@ async function run() {
       itemName: "Animal Kingdom",
       description: "Lots of animals to see!",
       imagePath: "../../public/images/animalkingdom.png",
+      alt: "Animal Kingdom",
       price: "200",
       peopleAlsoBought: []
     });
@@ -94,6 +101,7 @@ async function run() {
       itemName: "Hollywood Studios",
       description: "Knockoff Universal Studios!",
       imagePath: "../../public/images/hollywoodstudios.png",
+      alt: "Hollywood Studios",
       price: "200",
       peopleAlsoBought: []
     });
