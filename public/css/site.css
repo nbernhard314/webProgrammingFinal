@@ -3,7 +3,7 @@
 }
 
 .container h1 {
-  margin-top: 200px;
+  margin-top: 150px;
   text-align: center;
 }
 
@@ -64,6 +64,15 @@
 
 #popular {
   padding: 5rem;
+}
+
+.results h4 {
+  font-size: 24pt;
+  font-weight: bold;
+}
+
+.results p {
+  font-size: 14pt;
 }
 /***********************************************************/
 
@@ -153,4 +162,17 @@ nav {
     width: 90%;
     height: auto;
   }
+}
+
+/*********************/
+
+/* PRODUCT PAGE */
+
+#reviewform {
+  margin: 5pt;
+  padding: 2pt;
+}
+
+#reviewform button {
+  margin-top: 5pt;
 }

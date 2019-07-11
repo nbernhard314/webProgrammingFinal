@@ -1,6 +1,7 @@
 const data = require("../data");
 const users = data.users;
 const products = data.products;
+const coupons = data.coupons;
 const collections = require("./mongoCollections");
 
 async function run() {
@@ -96,6 +97,8 @@ async function run() {
       price: "200",
       peopleAlsoBought: []
     });
+    let saveFive = await coupons.createCoupon(5, "SAVE5NOW");
+    let saveTen = await coupons.createCoupon(10, "SUPERSECRETCODE");
     console.log("Seed complete.");
   } catch (e) {
     console.log("Error: " + e);

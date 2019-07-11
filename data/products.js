@@ -73,7 +73,7 @@ let exportedFunctions = {
     }
     try {
       const user = await users.getByUsername(reviewObj.postedBy);
-    } catch {
+    } catch (e) {
       throw `User with username ${reviewObj.postedBy} does not exist.`;
     }
     const objID = mongo.ObjectID(id);
