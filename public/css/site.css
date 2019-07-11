@@ -13,7 +13,8 @@
 }
 
 #home h3 {
-  padding: 50px;
+  padding: 20px;
+  margin-top: 5px;
 }
 .dropbtn {
   background-color: darkslategray;
@@ -63,18 +64,20 @@
 }
 
 #popular {
-  padding: 1rem;
+  padding: 7pt;
 }
 
 #search {
   padding: 1rem;
 }
-.results h4 {
+.results h4,
+#popular h3 {
   font-size: 24pt;
   font-weight: bold;
 }
 
-.results p {
+.results p,
+#popular p {
   font-size: 14pt;
 }
 
@@ -175,10 +178,6 @@ nav {
   }
 }
 
-img {
-  height: 20%;
-  width: 40%;
-}
 /*********************/
 
 /* PRODUCT PAGE */

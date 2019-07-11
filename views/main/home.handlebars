@@ -30,12 +30,10 @@
   <!-- SECTION FOR MOST POPULAR ITEMS -->
   {{#if popular}}
   <div id="popular">
-    <h3>MOST POPULAR ON OUR WEBSITE</h3>
-    <ul>
-      {{#each pop}}
-      <li><a href="/product/{{id}}">{{itemName}}</a></li>
-      {{/each}}
-    </ul>
+    <h3>Most Popular Activities on our Website</h3>
+    {{#each pop}}
+    <p><a href="/product/{{id}}">{{itemName}}</a></p>
+    {{/each}}
   </div>
   {{else}}
   <p>To view our most popular items, use our search function!</p>
