@@ -122,7 +122,7 @@ label {
 
 .cartItem input {
   position: relative;
-  width: 35px;
+  width: 50px;
 }
 .cartItem label {
   position: right;
@@ -192,15 +192,10 @@ nav {
   margin-top: 5pt;
 }
 
-<<<<<<< HEAD
-a {
-  color: #0072ee;
-=======
 .row {
   margin-left: auto;
   margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: center;
->>>>>>> b8475490766d433ee99bc425d1b1348aa8ee2ebc
 }

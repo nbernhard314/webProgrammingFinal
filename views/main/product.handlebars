@@ -8,6 +8,7 @@
 <div class="row">
 
     {{#if product }}
+
     <div class="form-group" id="productInfo">
         <img src="{{imagePath}}">
         <div class="alert alert-success">
@@ -43,6 +44,7 @@
     {{#if authenticated}}
     <form class="server-form" id="reviewform" method="post">
         <div class="form-group">
+            <h4>Add a Review</h4>
             <label for="title">Review Title</label>
             <input type="text" class="form-control" id="title" name="title" value="{{title}}">
 

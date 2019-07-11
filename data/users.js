@@ -153,7 +153,7 @@ let exportFunctions = {
     let user = await this.getByID(id);
     let newCart = user.cart;
     if (newCart[productID]) {
-      newCart[productID] = newCart[productID] + 1;
+      newCart[productID] = String(parseInt(newCart[productID]) + 1);
     } else {
       newCart[productID] = 1;
     }
@@ -198,6 +198,11 @@ let exportFunctions = {
       cart: newCart
     };
     const allUsers = await users();
+    for (prodID in newCart) {
+      if (newCart[id] == 0) {
+        delete newCart[prodID];
+      }
+    }
     const updateRet = await allUsers.updateOne(
       { _id: user._id },
       { $set: newUser }
