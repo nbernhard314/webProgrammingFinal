@@ -18,7 +18,7 @@ let exportFunctions = {
       typeof userObj.zip != "string" ||
       typeof userObj.password != "string"
     ) {
-      throw TypeError("Wrong type provided");
+      throw TypeError("Wrong type provided for user");
     }
     let duplicate = undefined;
     try {

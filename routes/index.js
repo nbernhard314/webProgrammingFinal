@@ -9,11 +9,21 @@ const xss = require("xss");
 //Add authenticated sessions with format {"sessionID":"username"}
 let authenticatedSessions = {};
 
-router.get("/", (req, res) => {
-  if (authenticatedSessions[req.session.id] == undefined) {
-    res.render("main/home", { authenticated: false });
-  } else {
-    res.render("main/home", { authenticated: true });
+router.get("/", async (req, res) => {
+  try {
+    const popular = await products.mostPopular();
+    res.render("main/home", {
+      popular: popular,
+      pop: popular.map(pop => {
+        return {
+          itemName: pop.itemName,
+          id: pop._id
+        };
+      }),
+      authenticated: authenticatedSessions[req.session.id] != undefined
+    });
+  } catch (e) {
+    res.render("main/home", { error: e });
   }
 });
 
@@ -26,10 +36,9 @@ router.post("/", async (req, res) => {
     return;
   }
   try {
-    //TODO: Need to fix this, search function is not working.
-    const results = await products.search(searchTerm);
     const popular = await products.mostPopular();
-    if(results.length == 0) {
+    const results = await products.search(searchTerm);
+    if (results.length == 0) {
       res.render("main/home", {
         error: "No results found."
       });
@@ -48,7 +57,7 @@ router.post("/", async (req, res) => {
             itemName: pop.itemName,
             id: pop._id
           };
-        }),
+        })
       });
     }
   } catch (e) {

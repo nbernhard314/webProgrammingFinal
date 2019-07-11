@@ -46,7 +46,7 @@ async function run() {
       price: "1",
       peopleAlsoBought: []
     });
-    
+
     let naps = await products.createProduct({
       itemName: "Napoli's",
       description: "Good Pizza on Washington",
@@ -92,24 +92,16 @@ async function run() {
     let animalKingdom = await products.createProduct({
       itemName: "Animal Kingdom",
       description: "Lots of animals to see!",
-<<<<<<< HEAD
-      imagePath: "../../public/images/animalkingdom.png",
-      alt: "Animal Kingdom",
-=======
       imagePath: "../../public/images/animalkingdom.jpg",
->>>>>>> b8475490766d433ee99bc425d1b1348aa8ee2ebc
       price: "200",
+      alt: "Animal Kingdom",
       peopleAlsoBought: []
     });
     let hollyWoodStudios = await products.createProduct({
       itemName: "Hollywood Studios",
-      description: "Knockoff Universal Studios!",
-<<<<<<< HEAD
-      imagePath: "../../public/images/hollywoodstudios.png",
       alt: "Hollywood Studios",
-=======
+      description: "Knockoff Universal Studios!",
       imagePath: "../../public/images/hollywoodstudios.jpg",
->>>>>>> b8475490766d433ee99bc425d1b1348aa8ee2ebc
       price: "200",
       peopleAlsoBought: []
     });
@@ -119,7 +111,6 @@ async function run() {
   } catch (e) {
     console.log("Error: " + e);
   }
-
   process.exit(0);
 }
 

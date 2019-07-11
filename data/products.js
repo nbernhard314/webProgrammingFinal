@@ -14,7 +14,7 @@ let exportedFunctions = {
       typeof prodObj.alt != "string" ||
       !prodObj.peopleAlsoBought instanceof Array
     ) {
-      throw TypeError("Wrong type provided.");
+      throw TypeError("Wrong type provided for product.");
     }
     let newProduct = {
       itemName: prodObj.itemName,
@@ -75,7 +75,7 @@ let exportedFunctions = {
     }
     try {
       const user = await users.getByUsername(reviewObj.postedBy);
-    } catch(e){
+    } catch (e) {
       throw "User with username ${reviewObj.postedBy} does not exist.";
     }
     const objID = mongo.ObjectID(id);
@@ -102,7 +102,7 @@ let exportedFunctions = {
       throw "Search must be string.";
     }
     let regex = new RegExp([".*", searchTerm, ".*"].join(""), "i");
-    const allProducts = await products();   
+    const allProducts = await products();
     const list = await allProducts
       .find({
         $or: [{ itemName: regex }, { description: regex }]
@@ -124,29 +124,33 @@ let exportedFunctions = {
     return true;
   },
 
-  async getRating(){
-    const allProducts = await this.getAllProducts();    
+  async getRating() {
+    const allProducts = await this.getAllProducts();
     let list = [];
     let count = 0;
     let i = 0;
     let j = 0;
-    for(i; i<allProducts.length; i++){
-      for(j; j<allProducts[i].reviews.length; j++){
+    for (i; i < allProducts.length; i++) {
+      for (j; j < allProducts[i].reviews.length; j++) {
         count = count + parseInt(allProducts[i].reviews[j].rating);
       }
-      list.push({ _id: allProducts[i]._id, rating: count, itemName: allProducts[i].itemName});
+      list.push({
+        _id: allProducts[i]._id,
+        rating: count,
+        itemName: allProducts[i].itemName
+      });
       count = 0;
     }
-    
+
     return list;
   },
 
-  async mostPopular(){
+  async mostPopular() {
     let ratings = await this.getRating();
-    ratings.sort(function(a,b) {
-      return b.rating - a.rating
+    ratings.sort(function(a, b) {
+      return b.rating - a.rating;
     });
-    if(ratings.length > 3){
+    if (ratings.length > 3) {
       return ratings.slice(0, 3);
     }
     return ratings;
