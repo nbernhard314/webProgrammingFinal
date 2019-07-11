@@ -24,11 +24,9 @@
   {{#if results}}
   <div class="results">
     <h4>Search Results</h4>
-    <ul>
-      {{#each result}}
-      <li><a href="/product/{{id}}">{{itemName}}</a></li>
-      {{/each}}
-    </ul>
+    {{#each result}}
+    <p><a href="/product/{{id}}">{{itemName}}</a></p>
+    {{/each}}
   </div>
   {{/if}}
 

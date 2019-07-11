@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require("../data");
 const users = data.users;
 const products = data.products;
+const coupons = data.coupons;
 const xss = require("xss");
 
 //Add authenticated sessions with format {"sessionID":"username"}
@@ -81,7 +82,7 @@ router.post("/login", async (req, res) => {
       console.log("login success");
       return;
     }
-  } catch {
+  } catch (e) {
     res
       .status(401)
       .render("auth/login", { error: "Invalid user name or password" });
@@ -160,7 +161,7 @@ router.post("/product/:id", async (req, res) => {
   }
 });
 
-router.get("/cart", async (req, res) => {
+router.post("/coupon", async (req, res) => {
   if (authenticatedSessions[req.session.id] == undefined) {
     res.redirect("/login");
   } else {
@@ -174,7 +175,47 @@ router.get("/cart", async (req, res) => {
       for (let c in cart) {
         let p = await products.getByID(c);
         items.push(p);
-        totalPrice += parseFloat(p.price * cart[c]);
+        totalPrice += parseFloat(p.price) * parseFloat(cart[c]);
+      }
+      const coup = await coupons.getByCode(xss(req.body.code));
+      const save = coup.savings;
+      const newTotal = totalPrice - save > 0 ? totalPrice - save : 0;
+      res.render("main/cart", {
+        item: items.map(item => {
+          return {
+            itemName: item.itemName,
+            price: item.price,
+            id: item._id,
+            quantity: cart[item._id]
+          };
+        }),
+        notEmpty: Object.keys(cart).length != 0,
+        totalPrice: newTotal,
+        authenticated: true
+      });
+    } catch (e) {
+      res.redirect("/cart");
+    }
+  }
+});
+
+router.get("/cart", async (req, res) => {
+  if (authenticatedSessions[req.session.id] == undefined) {
+    res.redirect("/login");
+  } else {
+    try {
+      const user = await users.getByUsername(
+        authenticatedSessions[req.session.id]
+      );
+      const cart = user.cart;
+      const items = [];
+      let totalPrice = 0;
+      for (let c in cart) {
+        if (parseFloat(cart[c]) > 0) {
+          let p = await products.getByID(c);
+          items.push(p);
+          totalPrice += parseFloat(p.price) * parseFloat(cart[c]);
+        }
       }
       res.render("main/cart", {
         item: items.map(item => {
@@ -190,7 +231,7 @@ router.get("/cart", async (req, res) => {
         authenticated: true
       });
     } catch (e) {
-      res.render("/cart", { error: e });
+      res.render("main/cart", { error: e });
     }
   }
 });
@@ -203,8 +244,14 @@ router.post("/cart", async (req, res) => {
       const user = await users.getByUsername(
         authenticatedSessions[req.session.id]
       );
-      await users.clearCart(user._id);
-      res.redirect("/cart");
+      if (!Object.keys(req.body).length) {
+        await users.clearCart(user._id);
+        res.redirect("/cart");
+      } else {
+        let obj = JSON.parse(JSON.stringify(req.body));
+        await users.updateCart(user._id, obj);
+        res.redirect("/cart");
+      }
     } catch (e) {
       res.render("main/cart", { error: e });
     }

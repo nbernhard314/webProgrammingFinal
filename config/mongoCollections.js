@@ -21,6 +21,7 @@ async function clearCollections() {
     const db = await dbConnection();
     await db.collection("Users").drop();
     await db.collection("Products").drop();
+    await db.collection("Coupons").drop();
   } catch (e) {
     console.log(e);
   }
@@ -30,5 +31,6 @@ async function clearCollections() {
 module.exports = {
   users: getCollectionFn("Users"),
   products: getCollectionFn("Products"),
+  coupons: getCollectionFn("Coupons"),
   clearCollections
 };
