@@ -199,7 +199,7 @@ let exportFunctions = {
     };
     const allUsers = await users();
     for (prodID in newCart) {
-      if (newCart[id] == 0) {
+      if (newCart[prodID] == 0) {
         delete newCart[prodID];
       }
     }
