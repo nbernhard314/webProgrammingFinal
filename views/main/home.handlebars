@@ -28,9 +28,18 @@
   {{/if}}
 
   <!-- SECTION FOR MOST POPULAR ITEMS -->
+  {{#if popular}}
   <div id="popular">
     <h3>MOST POPULAR ON OUR WEBSITE</h3>
+    <ul>
+      {{#each pop}}
+      <li><a href="/product/{{id}}">{{itemName}}</a></li>
+      {{/each}}
+    </ul>
   </div>
+  {{else}}
+  <p>To view our most popular items, use our search function!</p>
+  {{/if}}
 
 
 </div>
