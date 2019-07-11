@@ -5,7 +5,11 @@ const coupons = data.coupons;
 const collections = require("./mongoCollections");
 
 async function run() {
-  await collections.clearCollections();
+  try {
+    await collections.clearCollections();
+  } catch {
+    console.log("DB not cleared.");
+  }
   try {
     let adam = await users.createUser({
       username: "adam",
