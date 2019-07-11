@@ -27,7 +27,8 @@ router.post("/", async (req, res) => {
   try {
     //TODO: Need to fix this, search function is not working.
     const results = await products.search(searchTerm);
-    if (results.length == 0) {
+    const popular = await products.mostPopular();
+    if(results.length == 0) {
       res.render("main/home", {
         error: "No results found."
       });
@@ -39,7 +40,14 @@ router.post("/", async (req, res) => {
             itemName: result.itemName,
             id: result._id
           };
-        })
+        }),
+        popular: popular,
+        pop: popular.map(pop => {
+          return {
+            itemName: pop.itemName,
+            id: pop._id
+          };
+        }),
       });
     }
   } catch (e) {
